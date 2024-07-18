@@ -1,11 +1,11 @@
 from item import Item
-import api, os, datetime
+import api, os, datetime, csv, tqdm
 
 
 def resize_for_Dbug(array:list, new_size:int = 10) -> list:
     new_arr = []
     
-    for i in range(new_size):
+    for i in tqdm.tqdm(range(new_size)):
         new_arr.append(array[i])
         
     return new_arr
@@ -23,7 +23,7 @@ def repurpose_the_array(uids_list:list) ->  None:
         part:   convert the int types uids, to the item objects of the samr uids
         """
         
-    for i, uid in enumerate(uids_list):  
+    for i, uid in tqdm.tqdm(enumerate(uids_list)):  
         uids_list[i] = Item(api.get_item(uid))
 
 def constract_comments_array(stories_list:list)    ->  list:
@@ -37,11 +37,11 @@ def constract_comments_array(stories_list:list)    ->  list:
         """
     comments_uids = []
     
-    for story in stories_list:
+    for story in tqdm.tqdm(stories_list):
         prev_len = len(comments_uids)
         comments_uids += story.comments
         
-        for i in range(len(story.comments)):
+        for i in tqdm.tqdm(range(len(story.comments))):
             story.extend_coments(i, i + prev_len)
 
     return  comments_uids
@@ -62,7 +62,7 @@ def statistics()    -> list:
 
 #   TODO:   Auxiliary functions for statistics
 
-def save_as_CSV(array:list, headers_array:list, file_name:str, folder_path:str)   ->  None:       
+def save_as_CSV(array:list, headers_array:list, file_name:str)   ->  None:       
     """
         name:  item.extend_coments
         
@@ -75,7 +75,18 @@ def save_as_CSV(array:list, headers_array:list, file_name:str, folder_path:str) 
         
         part:   save the data as csv file
         """
-    #   TODO:   save_as_CSV script
+
+    print(os.getcwd())
+    with open(file_name + ".csv", 'w',  encoding="utf-8") as csvfile:
+        # creating a csv dict writer object
+        writer = csv.DictWriter(csvfile, fieldnames=headers_array)
+ 
+        # writing headers (field names)
+        writer.writeheader()
+ 
+        # writing data rows
+        writer.writerows(array)
+        
     pass    
 
 def show_statistics()   -> None:
@@ -100,45 +111,51 @@ def show_statistics()   -> None:
 top_stories = api.get_top_stories()
 top_stories = resize_for_Dbug(top_stories)
 
-print("top_stories: ", top_stories)
 #	creat objects to every uid story and place it in the OG array. function
 repurpose_the_array(top_stories)
 print("top_stories: ", top_stories)
 
 #	travers on the previous array and haverst the the comments uid's and place them in an array
-#	TODO:	travers on the previous array and haverst the the comments uid's and place them in an array		<-
 comments = constract_comments_array(top_stories)
 print("comments: ", comments)
+
 #	creat objects to every uid story and place it in the OG array. function
 repurpose_the_array(comments)
 print("comments: ", comments)
 
-#	TODO:	find out what are the top-level comments, and how to get them									<-
 
 #	statistics:
-#	TODO:	which statistics				<-
-#	TODO:	which order						<-
-#	TODO:	how								<-
+#TODO: statistics
 stats = statistics()
 
 
 
-#	CSV's files
-items_headers = ["uid", "title", "the content", "writer", "Published at", "score", "comments_quantity"]
+#   -----------         CSV's files         ----------
 
 folder_name = datetime.datetime.now().strftime("%m_%d_%H_%M_%S")
 
+#   changing the location for save the file in the right place
+if not os.path.exists("files"):
+    os.mkdir("files")
+print(os.getcwd())
+os.chdir("files") 
+os.mkdir(folder_name)
+os.chdir(folder_name) 
+
+
+items_headers = ["uid", "title", "the content", "writer", "Published at", "score", "comments_quantity"]
+
 #	the stories CSV file
-save_as_CSV(    top_stories,    items_headers,  "top_stories",
-            os.getcwd() + "\\files\\" + folder_name + "\\")
+save_as_CSV(    [item.get_as_dict() for item in top_stories],    items_headers, "top_stories")
 
 #	the comments CSV file
-save_as_CSV(    comments,    items_headers,  "top_comments",
-            os.getcwd() + "\\files\\" + folder_name + "\\")
+save_as_CSV(    [item.get_as_dict() for item in comments],    items_headers, "comments")
 
 #	the statistics CSV file
-save_as_CSV(    comments,    items_headers,  "top_comments",
-            os.getcwd() + "\\files\\" + folder_name + "\\")         #	TODO:	the stories statistics file		<-
+#save_as_CSV(    stats,    items_headers,  "stats")     #	TODO:	the stories statistics file		<-
+
+
+ #   -----------         visualization         ----------
 
 #	show the statistics on the screen
 show_statistics()
