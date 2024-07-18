@@ -1,0 +1,51 @@
+uid,title,the content,writer,Published at,score,comments_quantity
+40998158,"Devzat – Chat over SSH, with some nice quality-of-life features",,humanperhaps,1721325532,52,17
+40997087,Polychromatic Pixels,,bluehat974,1721319101,101,65
+40995515,The Objects of Our Life (1983),,Brajeshwar,1721310200,157,72
+40995982,Hash-based bisect debugging in compilers and runtimes,,rsc,1721313418,83,3
+40997799,Evolving the ASF Brand,,Tomte,1721323227,25,15
+40955272,Jigsaw Puzzle Robot [pdf],,kickofline,1720890281,50,12
+40997850,Transcribro: On-device Accurate Speech-to-text,,thebiblelover7,1721323515,6,1
+40992982,My daughter (7 years old) used HTML to make a website,,fintler,1721283891,698,315
+40997571,Eventual (YC W22) Is Hiring a Developer Relations Manager for Daft (SF),,sammysidhu,1721322052,1,
+40997775,What Materials Are Magnetic?,,rwmj,1721323135,4,2
+40998525,MapLab: Sleuthing for Undersea Cables,,divbzero,1721328165,8,1
+40995527,Sparrows may be 'canary in the coal mine' for lead poisoning in children: study,,Brajeshwar,1721310267,83,38
+40997020,Back to the future: Are hackers the future of amateur radio?,,austinallegro,1721318727,46,8
+40991182,A RP2040 based DECstation 3000 emulator that can run DECWindows,,dmitrygr,1721257886,166,40
+40994552,Ask HN: What's Prolog like in 2024?,"Hi, i am a compsci student that stumbled upon prolog and logic programming during my studies.<p>While i have seen the basics of vanilla prolog (atoms, predicates, cuts, lists and all that jazz) and a godawful implementation of an agent communication system that works on SICStus prolog. I would like to know more because i think that this language might be a powerhouse in per se.<p>Since my studies are quite basic in this regards i would like to expand my knowledge on it and kind of specialize myself both in this world and another world (ontologies :D) that i really enjoy.<p>What&#x27;s prolog like in 2024? what are you wonderful people doing with it?<p>thanks from a dumbass :D",overclock351,1721301786,250,152
+40988395,The unexpected poetry of PhD acknowledgements,,zsrobinson,1721238278,300,69
+40996058,Mistral NeMo,,bcatanzaro,1721313942,296,123
+40998351,Wing-slapping: A defensive behavior by honey bees against ants,,rntn,1721326911,5,0
+40958937,Elligator: Elliptic-curve points indistinguishable from uniform random strings (2013),,NavinF,1720933107,84,19
+40988837,A brief interview with Awk creator Dr. Brian Kernighan (2022),,breck,1721240924,216,103
+40990768,SAPwned: SAP AI vulnerabilities expose customers' cloud environments and privat,,todsacerdoti,1721253759,215,48
+40996429,SpreadsheetLLM – Microsoft's new AI system,,amai,1721316142,30,13
+40987730,Jailbreaking RabbitOS,,Retr0id,1721234498,1031,249
+40989069,Little Languages (1986) [pdf],,ashish01,1721242260,156,21
+40988954,NVIDIA Transitions Fully Towards Open-Source Linux GPU Kernel Modules,,shaicoleman,1721241636,790,222
+40991075,Closed form arc length parametrization is impossible for quadratic Bézier curves,,NinjaKoala,1721256699,96,39
+40989451,Show HN: Product Hunt for Music,,ewhicher,1721244664,139,51
+40991549,Overcoming the limits of current LLMs,,sean_pedersen,1721262924,69,73
+40990641,Show HN: SQLite Transaction Benchmarking Tool,"I wanted to make my own evaluation of what kind of performance I could expect from SQLite on a server and investigate the experimental `BEGIN CONCURRENT` branch vs the inbuilt `DEFERRED` and `IMMEDIATE` behaviors.<p>Explanatory blog post: <a href=""https:&#x2F;&#x2F;reorchestrate.com&#x2F;posts&#x2F;sqlite-transactions&#x2F;"" rel=""nofollow"">https:&#x2F;&#x2F;reorchestrate.com&#x2F;posts&#x2F;sqlite-transactions&#x2F;</a>",seddonm1,1721252682,107,13
+40987402,TinyPod – Apple Watch case with scroll wheel,,herbertl,1721232502,869,311
+40988076,Prover-Verifier Games improve legibility of language model outputs,,davidbarker,1721236537,122,26
+40985433,Reverse-Engineering an IP Camera (2019),,jnord,1721221339,193,100
+40993428,Post-Architecture: Premature Abstraction Is the Root of All Evil,,arendjr,1721288976,67,47
+40997585,GPT-4o mini: advancing cost-efficient intelligence,,bryanh,1721322135,117,40
+40972609,Electra: Pre-Training Text Encoders as Discriminators Rather Than Generators (2020),,luu,1721089100,59,8
+40978670,Vulnerable transistors threaten to upend Europa Clipper mission,,cratermoon,1721152213,170,103
+40987770,Show HN: VisCircuit – A Note-Taking Website for Electronics and Circuits,"Hi, everyone. I created a note-taking website for electronics and circuits where you can draw circuit diagrams and write text notes at the same time.<p>I am a Digital IC designer, and I self-study different types of analog and digital circuits a lot. However, I found a problem. Circuits have many different architectures and are hard to memorize due to numerous experiential tips. I want to document what I learn in my note app, but I found there is no method for me to easily draw circuit and block diagrams alongside text notes.<p>This issue has bothered me for a long time, from my master&#x27;s school to my current working life. I decided to solve it, so I created a note-taking website specifically for electronics and circuits, called VisCircuit.<p>With VisCircuit, you can easily draw circuit diagrams, block diagrams, and write text notes simultaneously. I have already used it for two weeks and have noted down things I find hard to remember, such as SRAM, amplifier circuits, and PCB components of Arduino and Raspberry Pi. I found this tool really useful for memorizing knowledge about electronics and circuits.<p>Currently, I have opened VisCircuit for alpha testing, and I want to let some people use it and give me feedback. Feel free to try it, and I will really appreciate what you think about this project. Leave any suggestions for improvement. Thank you very much.",darrenyaoyaoyao,1721234774,102,20
+40998549,Google URL Shortener links will no longer be available,,mikece,1721328332,14,8
+40995141,Anti-ageing 'supermodel granny' drug extends life in mice by 25%,,isaacfrond,1721307396,21,25
+40997086,Our website is closed on Sundays,,aendruk,1721319095,28,5
+40997697,PyCon 2024 Videos Released,,ampersand42,1721322717,13,0
+40982118,Import and Export Markdown in Google Docs,,pentagrama,1721184291,612,126
+40996183,Von der Leyen reelected as EU Commission president,,Rinzler89,1721314719,5,0
+40978596,Mystery as 4k-year-old axe-heads sent to museum,,thunderbong,1721151652,93,86
+40991661,Show HN: Llm2sh – Translate plain-language requests into shell commands,"This is my take on the common &quot;use llms to generate shell commands&quot; utility. Emphasis is placed on good CLI UX, simplicity, and flexibility.<p>`llm2sh` supports multiple LLM providers and lets LLMs generate multi-command sequences to handle complex tasks. There is also limited support for commands requiring `sudo` and other basic input.<p>I recommend using Groq llama3-70b for day-to-day use. The ultra-low latency is a game-changer - its near-instant responses helps `llm2sh` integrate seamlessly into day-to-day tasks without breaking you out of the &#x27;zone&#x27;. For more advanced tasks, swapping to smarter models is just a CLI option away.",RandomBK,1721264568,53,20
+40998008,Claude by Anthropic Now on Google Play Store,,vyrotek,1721324500,27,9
+40996329,How Many Elite Chess Players Cheat?,,drw,1721315618,4,1
+40976474,"NSCopyObject, the griefer that keeps on griefing",,chmaynard,1721136847,127,42
+40988669,Can I? Tools,,todsacerdoti,1721239826,38,1
+40970560,"Run CUDA, unmodified, on AMD GPUs",,Straw,1721070307,1286,394

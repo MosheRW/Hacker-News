@@ -58,8 +58,28 @@ def statistics()    -> list:
         part:   calculate the statistics, and return list of them (maybe as tupls)
         """
     #   TODO:   statistics script
-    pass
+    stats = [how_many_stories_pulished_at_any_date()]
+    
 
+    return stats
+    
+
+def how_many_stories_pulished_at_any_date()    ->  dict:
+    """
+        name:  how_many_stories_pulished_at_any_date
+        
+        input:  None.
+        output: dict with num of publications for any day in the last 500 publications  
+        """
+    dates = {}      #   {date :     counter}
+    for story in top_stories:
+       
+        date = datetime.datetime.fromtimestamp(story.time_of_creation)
+        date = str(date.month)  +   str(date.day)
+        dates[date] = dates.get(date, 0) + 1
+        
+    return dates
+    
 #   TODO:   Auxiliary functions for statistics
 
 def save_as_CSV(array:list, headers_array:list, file_name:str)   ->  None:       
@@ -92,15 +112,12 @@ def save_as_CSV(array:list, headers_array:list, file_name:str)   ->  None:
 def show_statistics()   -> None:
     #   TODO:    show_statistics documantation 
     """
-        name:  item.extend_coments
+        name:  show_statistics
         
-        input:  
-            -   the internal index of the comment.
-            -   the  comment uid.
-            -   the new outer index of the comment.                
+        input:  None.           
         output: None.
         
-        part:   to add the outer index of the full detailed comment in the second array
+        part:  
         """
     #   TODO:   show_statistics script
     pass
@@ -109,19 +126,16 @@ def show_statistics()   -> None:
 
 #	Harvest the top stories uid's and place them in an array
 top_stories = api.get_top_stories()
-top_stories = resize_for_Dbug(top_stories)
+top_stories = resize_for_Dbug(top_stories, 50)
 
 #	creat objects to every uid story and place it in the OG array. function
 repurpose_the_array(top_stories)
-print("top_stories: ", top_stories)
 
 #	travers on the previous array and haverst the the comments uid's and place them in an array
 comments = constract_comments_array(top_stories)
-print("comments: ", comments)
 
 #	creat objects to every uid story and place it in the OG array. function
 repurpose_the_array(comments)
-print("comments: ", comments)
 
 
 #	statistics:
@@ -132,7 +146,9 @@ stats = statistics()
 
 #   -----------         CSV's files         ----------
 
+#   the folder name for the files we'll save that time
 folder_name = datetime.datetime.now().strftime("%m_%d_%H_%M_%S")
+
 
 #   changing the location for save the file in the right place
 if not os.path.exists("files"):
@@ -142,16 +158,16 @@ os.chdir("files")
 os.mkdir(folder_name)
 os.chdir(folder_name) 
 
-
+#   the headers for the stories and comments csv tables 
 items_headers = ["uid", "title", "the content", "writer", "Published at", "score", "comments_quantity"]
 
-#	the stories CSV file
+#	create and save the stories CSV file
 save_as_CSV(    [item.get_as_dict() for item in top_stories],    items_headers, "top_stories")
 
-#	the comments CSV file
+#	create and save the comments CSV file
 save_as_CSV(    [item.get_as_dict() for item in comments],    items_headers, "comments")
 
-#	the statistics CSV file
+#	create and save the statistics CSV file
 #save_as_CSV(    stats,    items_headers,  "stats")     #	TODO:	the stories statistics file		<-
 
 
