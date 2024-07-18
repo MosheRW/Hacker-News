@@ -1,23 +1,41 @@
 
 
 class item:
+    """
+    name:
+    perpuse:
+    main functions:
     
-    def __init__(self, argumants) -> None:
+    attributes:
+    """
+    
+    def __init__(self, argumants: dict) -> None:
+        """
+        name:   item.__init__
+        input:  argumants dictionary
+        output: item object, nothing.
         
-        self.__uid = 0
-        self.__writer = ""
-        self.__time_of_creation = 0
+        part:   to creat and initlize an item object
+        """
         
-        self.__score
-        self.__comments_quantity = 0
+        #Details
+        self.__url = argumants["url"]                       #   The URL of the story.
+        self.__uid = argumants["id"]                        #   he item's unique id.
+        self.__writer = argumants["by"]                     #   The username of the item's author.
+        self.__time_of_creation = argumants["time"]         #   Creation date of the item, in Unix Time.
+        
+        #Statistics
+        self.__score = argumants["score"]                   #   The story's score.
+        self.__comments_quantity = argumants["descendants"] #   The total comment count.
 
-        self.__title = ""
-        self.__the_content = ""
+        #The real content
+        self.__title = argumants["title"]                   #   The title of the story.
+        self.__the_content = argumants["text"]              #   The comment or story text.
         
-        self.__comments_uid = []
-        
-        
-        
-
-        
+        """
+        initilize with The ids of the item's comments, in ranked display order.
+        But during the program we well replace them with tuples,
+        whom conatains in adddition to the id, the index of the comment in the other  array     """
+        self.__comments = []                                #   The ids of the item's comments, in ranked display order.
+                                                          
     
