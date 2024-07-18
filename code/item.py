@@ -70,35 +70,36 @@ class item:
 
 #   ---------   class special set methodes     ---------
 
-    def   extend_coments(self, inner_index:int , comment_uid:int, outer_index:int)  -> None:
+    def   extend_coments(self, inner_index:int , outer_index:int)  -> None:
         """
         name:  item.extend_coments
         
         input:  
             -   the internal index of the comment.
-            -   the  comment uid.
             -   the new outer index of the comment.                
         output: None.
         
         part:   to add the outer index of the full detailed comment in the second array
         """
-        pass
+        self.__comments[inner_index] = (outer_index, self.__comments[inner_index])
         
     
 
 #   ---------   class special get methodes     ---------    
 
     #   get methode that returns the title, text, and statistics as str
-    def get_as_str(self)    ->  str:
+    def get_as_str(self, separator:str = "\n")    ->  str:
         """
         name:  item.get_as_str
         
-        input:  None.
+        input:  separator (opt, default is 'endl')
         output: the title, text, and statistics as str
         
         part:   get methode that returns the title, text, and statistics as str
         """
-        pass
+        return self.__title + separator + self.__the_content + separator    +\
+                     "score: "  +   self.__score    +   separator  +\
+                 "comments_quantity: "   +   self.__comments_quantity
     
     #   get methode that return all the data, in a stracture that suits to CSV
     def get_as_dict(self)    ->  dict:
@@ -110,7 +111,18 @@ class item:
         
         part:   get methode that return all the data, in a stracture that suits to write a CSV.
         """
-        pass
+        out = { "uid"               :   self.__uid,
+                "title"             :   self.__title,
+                "the content"       :   self.__the_content,
+                "writer"            :   self.__writer,
+                "Published at"      :   self.__time_of_creation,
+                "score"             :   self.__score,
+                "comments_quantity" :   self.__comments_quantity    }
+        
+        return out
+               
+
+
     
     
 #   ---------   class special representation methodes     ---------

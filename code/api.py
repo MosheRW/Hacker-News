@@ -1,3 +1,8 @@
+"""
+    module, that providing api functions to the Hacker News website
+    """
+
+
 import urllib3
 
 
