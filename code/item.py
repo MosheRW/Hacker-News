@@ -39,3 +39,31 @@ class item:
         self.__comments = []                                #   The ids of the item's comments, in ranked display order.
                                                           
     
+
+        @property
+        def url(self) -> str:
+            return  self.__url
+        
+        @property
+        def uid(self) -> int:
+            return self.__uid
+
+        @property
+        def writer(self) -> str:
+            return self.__writer
+        
+        @property
+        def time_of_creation(self) -> int:
+            return self.__time_of_creation
+        
+        @property
+        def score(self) -> int:
+            return self.__score
+        
+        @property   
+        def comments_quantity(self) -> int:
+            return self.__comments_quantity
+
+        @property
+        def comments(self) -> list:
+            return self.__comments
