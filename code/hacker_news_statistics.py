@@ -1,5 +1,7 @@
+import datetime
 import item
 import api
+import os
 
 
 def repurpose_the_array(uids_list:list) ->  None:
@@ -76,31 +78,47 @@ def show_statistics()   -> None:
 
 
 #	Harvest the top stories uid's and place them in an array
-#	TODO:	Harvest the top stories uid's and place them in an array										<-
-
+top_stories = api.get_top_stories()
+print(top_stories)
 #	creat objects to every uid story and place it in the OG array. function
-#	TODO:	creat objects to every uid story and place it in the OG array. function							<-
-
+repurpose_the_array(top_stories)
+print(top_stories)
 
 #	travers on the previous array and haverst the the comments uid's and place them in an array
 #	TODO:	travers on the previous array and haverst the the comments uid's and place them in an array		<-
+comments = constract_comments_array(top_stories)
+print(comments)
+#	creat objects to every uid story and place it in the OG array. function
+repurpose_the_array(comments)
+print(comments)
+
 #	TODO:	find out what are the top-level comments, and how to get them									<-
 
 #	statistics:
 #	TODO:	which statistics				<-
 #	TODO:	which order						<-
 #	TODO:	how								<-
+stats = statistics()
+
 
 
 #	CSV's files
+items_headers = ["uid", "title", "the content", "writer", "Published at", "score", "comments_quantity"]
+
+now = datetime.now()
+folder_name = now.strftime("%m_%d_%H_%M_%S")
 
 #	the stories CSV file
-#	TODO:	the stories CSV file			<-
+save_as_CSV(    top_stories,    items_headers,  "top_stories",
+            os.getcwd() + "\\files\\" + folder_name + "\\")
 
 #	the comments CSV file
-#	TODO:	the stories comments file		<-
+save_as_CSV(    comments,    items_headers,  "top_comments",
+            os.getcwd() + "\\files\\" + folder_name + "\\")
 
 #	the statistics CSV file
-#	TODO:	the stories statistics file		<-
+save_as_CSV(    comments,    items_headers,  "top_comments",
+            os.getcwd() + "\\files\\" + folder_name + "\\")         #	TODO:	the stories statistics file		<-
 
 #	show the statistics on the screen
+show_statistics()
