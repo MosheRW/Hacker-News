@@ -1,5 +1,5 @@
 import datetime
-import item
+from item import Item
 import api
 import os
 
@@ -13,8 +13,9 @@ def repurpose_the_array(uids_list:list) ->  None:
         
         part:   convert the int types uids, to the item objects of the samr uids
         """
-    #   TODO:   repurpose_the_array script
-    pass    
+        
+    for i, uid in enumerate(uids_list):  
+        uids_list[i] = Item(uid)
 
 def constract_comments_array(stories_list:list)    ->  list:
     """
@@ -26,7 +27,18 @@ def constract_comments_array(stories_list:list)    ->  list:
         part:   travers on the previous array and haverst the the comments uid's and place them in an array
         """
     #   TODO:   constract_comments_array script
-    pass
+    comments_uids = []
+    
+    for story in stories_list:
+        rng = range(len(comments_uids), len(story))
+        
+        comments_uids += story.comments
+        
+        for i in range(story.comments):
+            story.extend_coments(i, i + rng)
+
+    return  comments_uids
+
 
 def statistics()    -> list:
     #   TODO:    needs to decide if the lis wil be a tupls list 

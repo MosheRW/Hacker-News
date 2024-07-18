@@ -1,6 +1,6 @@
 
 
-class item:
+class Item:
     #   TODO:   documantation
     """
     name:
@@ -143,7 +143,17 @@ class item:
         return out
     
     
-#   ---------   class special copmarison methodes     ---------    
+#   ---------   class special copmarison methodes   ---------    
 
 
-#   ---------   class copmarison methodes     ---------    
+#   ---------   class copmarison methodes           ---------    
+
+
+#   ---------   class special methodes              ---------    
+
+    def __len__(self)   -> int:
+        assert self.__comments_quantity == len(self.__comments), "Error!"
+        
+        return self.__comments_quantity
+
+    
