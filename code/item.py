@@ -39,7 +39,7 @@ class item:
         self.__comments = []                                #   The ids of the item's comments, in ranked display order.
                                                           
     
-#---------   class getters     ---------
+#   ---------   class getters     ---------
     @property
     def url(self) -> str:
         return  self.__url
@@ -68,7 +68,35 @@ class item:
     def comments(self) -> list:
         return self.__comments
 
-#---------   class setters     ---------
+#   ---------   class special set methodes     ---------
 
+    def   extend_coments(self, inner_index:int , comment_uid:int, outer_index:int)  -> None:
+        """
+        name:  item.extend_coments
+        
+        input:  
+            -   the internal index of the comment.
+            -   the  comment uid.
+            -   the new outer index of the comment.                
+        output: None.
+        
+        part:   to add the outer index of the full detailed comment in the second array
+        """
+        pass
+        
+    
 
-#---------   class special get methodes     ---------    
+#   ---------   class special get methodes     ---------    
+
+    #   get methode that returns the title, text, and statistics as str
+    
+    #   get methode that return all the data, in a stracture that suits to CSV
+    
+#   ---------   class special representation methodes     ---------
+
+    #   repr
+    
+    #   str
+    
+    
+#   ---------   class special copmarison methodes     ---------    
