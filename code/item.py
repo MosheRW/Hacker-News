@@ -156,6 +156,7 @@ class Item:
         
         return out
     
+#   TODO: erease thos sections if the will not be use
     
 #   ---------   class special copmarison methodes   ---------    
 
