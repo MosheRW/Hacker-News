@@ -89,8 +89,29 @@ class item:
 #   ---------   class special get methodes     ---------    
 
     #   get methode that returns the title, text, and statistics as str
+    def get_as_str(self)    ->  str:
+        """
+        name:  item.get_as_str
+        
+        input:  None.
+        output: the title, text, and statistics as str
+        
+        part:   get methode that returns the title, text, and statistics as str
+        """
+        pass
     
     #   get methode that return all the data, in a stracture that suits to CSV
+    def get_as_dict(self)    ->  dict:
+        """
+        name:  item.get_as_dict
+        
+        input:  None.
+        output: dictionary with all the data except the comments uids
+        
+        part:   get methode that return all the data, in a stracture that suits to write a CSV.
+        """
+        pass
+    
     
 #   ---------   class special representation methodes     ---------
 

@@ -41,18 +41,18 @@ def statistics()    -> list:
 
 #   TODO:   Auxiliary functions for statistics
 
-def save_as_CSV(array:list)   ->  None:
-        #   TODO:    save_as_CSV documantation 
+def save_as_CSV(array:list, headers_array:list, file_name:str, folder_path:str)   ->  None:       
     """
         name:  item.extend_coments
         
         input:  
-            -   the internal index of the comment.
-            -   the  comment uid.
-            -   the new outer index of the comment.                
-        output: None.
+            -   list of row dictionaries
+            -   list of the csv headers
+            -   file name
+            -   folder path
+        output: None.   but careat new CSV file with the data in it
         
-        part:   to add the outer index of the full detailed comment in the second array
+        part:   save the data as csv file
         """
     #   TODO:   save_as_CSV script
     pass    
