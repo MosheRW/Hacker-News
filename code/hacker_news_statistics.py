@@ -1,3 +1,4 @@
+from matplotlib import pyplot as plt
 from item import Item
 import api, os, datetime, csv, tqdm
 
@@ -59,6 +60,8 @@ def statistics()    -> list:
         """
     #   TODO:   statistics script
     stats = [how_many_stories_pulished_at_any_date()]
+    stats += [how_many_stories_pulished_at_any_weekDay()]
+    stats += [how_many_comments_comapaird_to_the_weekDay()]
     
 
     return stats
@@ -75,11 +78,46 @@ def how_many_stories_pulished_at_any_date()    ->  dict:
     for story in top_stories:
        
         date = datetime.datetime.fromtimestamp(story.time_of_creation)
+        
         date = str(date.month)  +   str(date.day)
+        
         dates[date] = dates.get(date, 0) + 1
         
     return dates
+
+def how_many_stories_pulished_at_any_weekDay()    ->  dict:
+    """
+        name:  how_many_stories_pulished_at_any_weekDay
+        
+        input:  None.
+        output: dict with num of publications for any weekDay in the last 500 publications  
+        """
+    dates = {}      #   {date :     counter}
+    for story in top_stories:
+       
+        date = datetime.datetime.fromtimestamp(story.time_of_creation)
+
+        dates[date.weekday()] = dates.get(date.weekday(), 0) + 1
+        
+    return dates
     
+def how_many_comments_comapaird_to_the_weekDay()    ->  dict:
+    """
+        name:  how_many_coments_comapaird_to_the_week_day
+        
+        input:  None.
+        output: dict with num of publications for any weekDay in the last 500 publications  
+        """
+    dates = {}      #   {date :     counter}
+    for story in top_stories:
+       
+        date = datetime.datetime.fromtimestamp(story.time_of_creation)
+
+        dates[date.weekday()] = dates.get(date.weekday(), 0) + len(story)
+        
+    return dates
+    
+
 #   TODO:   Auxiliary functions for statistics
 
 def save_as_CSV(array:list, headers_array:list, file_name:str)   ->  None:       
@@ -120,6 +158,13 @@ def show_statistics()   -> None:
         part:  
         """
     #   TODO:   show_statistics script
+    
+    for stat in stats:
+        print (stat.keys, stat.values)
+        
+        plt.plot(stat.keys, stat.values)
+        plt.show()
+
     pass
 
 

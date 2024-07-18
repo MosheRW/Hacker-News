@@ -35,6 +35,7 @@ print(dt.month)
 # print(dt)
 
 # print(dt.month)
+print(dt.weekday())
 
 
 

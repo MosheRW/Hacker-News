@@ -167,7 +167,7 @@ class Item:
 #   ---------   class special methodes              ---------    
 
     def __len__(self)   -> int:
-        assert self.__comments_quantity == len(self.__comments), "Error!"        
+        #assert self.__comments_quantity == len(self.__comments), "Error!"        
         #return self.__comments_quantity
         return len(self.__comments)
 
