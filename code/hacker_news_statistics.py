@@ -160,9 +160,9 @@ def show_statistics()   -> None:
     #   TODO:   show_statistics script
     
     for stat in stats:
-        print (stat.keys, stat.values)
+        print (stat.keys(), stat.values())
         
-        plt.plot(stat.keys, stat.values)
+        plt.plot(stat.keys(), stat.values())
         plt.show()
 
     pass
