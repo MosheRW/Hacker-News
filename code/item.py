@@ -1,6 +1,7 @@
 
 
 class item:
+    #   TODO:   documantation
     """
     name:
     perpuse:
@@ -101,6 +102,7 @@ class item:
                      "score: "  +   self.__score    +   separator  +\
                  "comments_quantity: "   +   self.__comments_quantity
     
+
     #   get methode that return all the data, in a stracture that suits to CSV
     def get_as_dict(self)    ->  dict:
         """
@@ -120,16 +122,28 @@ class item:
                 "comments_quantity" :   self.__comments_quantity    }
         
         return out
-               
-
 
     
-    
-#   ---------   class special representation methodes     ---------
+#   ---------   class representation methodes     ---------
 
-    #   repr
+    def __repr__(self) -> str:
+        return self.get_as_str(", ")
     
     #   str
+    def __str__(self) -> str:
+
+        out =   "uid: "                 +   str(self.__uid)                 +   \
+                "title: "               +   self.__title                    +   \
+                "the content: "         +   self.__the_content              +   \
+                "writer: "              +   self.__writer                   +   \
+                "Published at: "        +   str(self.__time_of_creation)    +   \
+                "score: "               +   str(self.__score)               +   \
+                "comments_quantity: "   +   str(self.__comments_quantity)  
+        
+        return out
     
     
 #   ---------   class special copmarison methodes     ---------    
+
+
+#   ---------   class copmarison methodes     ---------    
