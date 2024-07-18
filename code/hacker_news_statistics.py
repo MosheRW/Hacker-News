@@ -1,7 +1,16 @@
-import datetime
 from item import Item
-import api
-import os
+import api, os, datetime
+
+
+def resize_for_Dbug(array:list, new_size:int = 10) -> list:
+    new_arr = []
+    
+    for i in range(new_size):
+        new_arr.append(array[i])
+        
+    return new_arr
+
+
 
 
 def repurpose_the_array(uids_list:list) ->  None:
@@ -15,7 +24,7 @@ def repurpose_the_array(uids_list:list) ->  None:
         """
         
     for i, uid in enumerate(uids_list):  
-        uids_list[i] = Item(uid)
+        uids_list[i] = Item(api.get_item(uid))
 
 def constract_comments_array(stories_list:list)    ->  list:
     """
@@ -26,22 +35,20 @@ def constract_comments_array(stories_list:list)    ->  list:
         
         part:   travers on the previous array and haverst the the comments uid's and place them in an array
         """
-    #   TODO:   constract_comments_array script
     comments_uids = []
     
     for story in stories_list:
-        rng = range(len(comments_uids), len(story))
-        
+        prev_len = len(comments_uids)
         comments_uids += story.comments
         
-        for i in range(story.comments):
-            story.extend_coments(i, i + rng)
+        for i in range(len(story.comments)):
+            story.extend_coments(i, i + prev_len)
 
     return  comments_uids
 
 
 def statistics()    -> list:
-    #   TODO:    needs to decide if the lis wil be a tupls list 
+    #   TODO:    needs to decide if the list wil be a tupls list 
     """
         name:  statistics
         
@@ -91,18 +98,20 @@ def show_statistics()   -> None:
 
 #	Harvest the top stories uid's and place them in an array
 top_stories = api.get_top_stories()
-print(top_stories)
+top_stories = resize_for_Dbug(top_stories)
+
+print("top_stories: ", top_stories)
 #	creat objects to every uid story and place it in the OG array. function
 repurpose_the_array(top_stories)
-print(top_stories)
+print("top_stories: ", top_stories)
 
 #	travers on the previous array and haverst the the comments uid's and place them in an array
 #	TODO:	travers on the previous array and haverst the the comments uid's and place them in an array		<-
 comments = constract_comments_array(top_stories)
-print(comments)
+print("comments: ", comments)
 #	creat objects to every uid story and place it in the OG array. function
 repurpose_the_array(comments)
-print(comments)
+print("comments: ", comments)
 
 #	TODO:	find out what are the top-level comments, and how to get them									<-
 
@@ -117,8 +126,7 @@ stats = statistics()
 #	CSV's files
 items_headers = ["uid", "title", "the content", "writer", "Published at", "score", "comments_quantity"]
 
-now = datetime.now()
-folder_name = now.strftime("%m_%d_%H_%M_%S")
+folder_name = datetime.datetime.now().strftime("%m_%d_%H_%M_%S")
 
 #	the stories CSV file
 save_as_CSV(    top_stories,    items_headers,  "top_stories",
@@ -134,3 +142,8 @@ save_as_CSV(    comments,    items_headers,  "top_comments",
 
 #	show the statistics on the screen
 show_statistics()
+
+
+
+
+print("THE END")

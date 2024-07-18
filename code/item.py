@@ -3,11 +3,24 @@
 class Item:
     #   TODO:   documantation
     """
-    name:
-    perpuse:
+    name:   Item
+    perpuse:    to store hackerNews stories and comments in an orgenized methode
     main functions:
+        -   item.extend_coments: get two indicators, 
+        and place the second one in a tuple alongside with the comment indexed with the first iserted index
+        -   item.get_as_dict: retruns dictionary with the important attributes in a way thats suits CSV files
     
     attributes:
+        -   __url: The URL of the story.
+        -   __uid: The item's unique id.
+        -   __writer: The username of the item's author
+        -   __time_of_creation: Creation date of the item, in Unix Time.
+        -   __score: The story's score.
+        -   __comments_quantity:  The total comment count
+        -   __title: The title of the story.
+        -   __the_content: The total comment count.
+        -   __comments: The comments, in ranked display order.
+    
     """
     
     def __init__(self, argumants: dict) -> None:
@@ -20,24 +33,24 @@ class Item:
         """
         
         #Details
-        self.__url = argumants["url"]                       #   The URL of the story.
-        self.__uid = argumants["id"]                        #   he item's unique id.
-        self.__writer = argumants["by"]                     #   The username of the item's author.
-        self.__time_of_creation = argumants["time"]         #   Creation date of the item, in Unix Time.
+        self.__url = argumants.get("url","")                       #   The URL of the story.
+        self.__uid = argumants.get("id","")                        #   The item's unique id.
+        self.__writer = argumants.get("by","")                     #   The username of the item's author.
+        self.__time_of_creation = argumants.get("time","")         #   Creation date of the item, in Unix Time.
         
         #Statistics
-        self.__score = argumants["score"]                   #   The story's score.
-        self.__comments_quantity = argumants["descendants"] #   The total comment count.
+        self.__score = argumants.get("score","")                   #   The story's score.
+        self.__comments_quantity = argumants.get("descendants","") #   The total comment count.
 
         #The real content
-        self.__title = argumants["title"]                   #   The title of the story.
-        self.__the_content = argumants["text"]              #   The comment or story text.
+        self.__title = argumants.get("title","")                   #   The title of the story.
+        self.__the_content = argumants.get("text","")              #   The comment or story text.
         
         """
         initilize with The ids of the item's comments, in ranked display order.
         But during the program we well replace them with tuples,
         whom conatains in adddition to the id, the index of the comment in the other  array     """
-        self.__comments = []                                #   The ids of the item's comments, in ranked display order.
+        self.__comments = argumants.get("kids","")                  #   The ids of the item's comments, in ranked display order.
                                                           
     
 #   ---------   class getters     ---------
@@ -98,9 +111,9 @@ class Item:
         
         part:   get methode that returns the title, text, and statistics as str
         """
-        return self.__title + separator + self.__the_content + separator    +\
-                     "score: "  +   self.__score    +   separator  +\
-                 "comments_quantity: "   +   self.__comments_quantity
+        return "{ " + self.__title + separator + self.__the_content + separator    +\
+                     "score: "  +   str(self.__score)    +   separator  +\
+                 "comments_quantity: "   +   str(self.__comments_quantity) + " }"
     
 
     #   get methode that return all the data, in a stracture that suits to CSV
@@ -132,13 +145,14 @@ class Item:
     #   str
     def __str__(self) -> str:
 
-        out =   "uid: "                 +   str(self.__uid)                 +   \
+        out =   "{ "                                                        +   \
+                "uid: "                 +   str(self.__uid)                 +   \
                 "title: "               +   self.__title                    +   \
                 "the content: "         +   self.__the_content              +   \
                 "writer: "              +   self.__writer                   +   \
                 "Published at: "        +   str(self.__time_of_creation)    +   \
                 "score: "               +   str(self.__score)               +   \
-                "comments_quantity: "   +   str(self.__comments_quantity)  
+                "comments_quantity: "   +   str(self.__comments_quantity)   +   " }"  
         
         return out
     
@@ -152,8 +166,8 @@ class Item:
 #   ---------   class special methodes              ---------    
 
     def __len__(self)   -> int:
-        assert self.__comments_quantity == len(self.__comments), "Error!"
-        
-        return self.__comments_quantity
+        assert self.__comments_quantity == len(self.__comments), "Error!"        
+        #return self.__comments_quantity
+        return len(self.__comments)
 
     
