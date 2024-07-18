@@ -1,66 +1,40 @@
 import item
 import api
 
-def get_items_array(uids_list:list)	-> None:
-    #   TODO:    get_items_array documantation 
-    """
-        name:  item.extend_coments
-        
-        input:  
-            -   the internal index of the comment.
-            -   the  comment uid.
-            -   the new outer index of the comment.                
-        output: None.
-        
-        part:   to add the outer index of the full detailed comment in the second array
-        """
-    #   TODO:   get_items_array script
-    pass
 
 def repurpose_the_array(uids_list:list) ->  None:
-      #   TODO:    repurpose_the_array documantation 
     """
-        name:  item.extend_coments
+        name:  repurpose_the_array
         
-        input:  
-            -   the internal index of the comment.
-            -   the  comment uid.
-            -   the new outer index of the comment.                
-        output: None.
+        input:  array contains items uids
+        output: None. but changes the inserted list
         
-        part:   to add the outer index of the full detailed comment in the second array
+        part:   convert the int types uids, to the item objects of the samr uids
         """
     #   TODO:   repurpose_the_array script
     pass    
 
 def constract_comments_array(stories_list:list)    ->  list:
-    #   TODO:    constract_comments_array documantation
     """
-        name:  item.extend_coments
+        name:   constract_comments_array
         
-        input:  
-            -   the internal index of the comment.
-            -   the  comment uid.
-            -   the new outer index of the comment.                
-        output: None.
+        input:  the stories list array
+        output: array that contains all the top comments uids
         
-        part:   to add the outer index of the full detailed comment in the second array
+        part:   travers on the previous array and haverst the the comments uid's and place them in an array
         """
     #   TODO:   constract_comments_array script
     pass
 
 def statistics()    -> list:
-    #   TODO:    statistics documantation 
+    #   TODO:    needs to decide if the lis wil be a tupls list 
     """
-        name:  item.extend_coments
+        name:  statistics
         
-        input:  
-            -   the internal index of the comment.
-            -   the  comment uid.
-            -   the new outer index of the comment.                
-        output: None.
+        input:  None, but uses the two global arrays            
+        output: list of the statistics data
         
-        part:   to add the outer index of the full detailed comment in the second array
+        part:   calculate the statistics, and return list of them (maybe as tupls)
         """
     #   TODO:   statistics script
     pass
