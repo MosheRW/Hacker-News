@@ -61,12 +61,26 @@ def statistics()    -> list:
         part:   calculate the statistics, and return list of them (maybe as tupls)
         """
     #   TODO:   statistics script
-    stats = [stats_dict_2_sorted_list_tuples(how_many_stories_pulished_at_any_date())]
-    stats += [stats_dict_2_sorted_list_tuples(how_many_stories_pulished_at_any_weekDay())]
-    stats += [stats_dict_2_sorted_list_tuples(how_many_comments_comapaird_to_the_weekDay())]
+    stats = [stats_dict_2_sorted_list_tuples(   
+                                how_many_pulished_at_any_date(top_stories))]
+    stats = [stats_dict_2_sorted_list_tuples(
+                                how_many_pulished_at_any_date(comments))]
+    
+
+    stats += [stats_dict_2_sorted_list_tuples(
+                                how_many_pulished_at_any_weekDay(top_stories))]
+    stats += [stats_dict_2_sorted_list_tuples(
+                                how_many_pulished_at_any_weekDay(comments))]
+    
+
+    stats += [stats_dict_2_sorted_list_tuples(
+                                how_many_pulished_comapaird_to_the_weekDay(top_stories))]
+    stats += [stats_dict_2_sorted_list_tuples(
+                                how_many_pulished_comapaird_to_the_weekDay(comments))]
     
 
     return stats
+
 
 def stats_dict_2_sorted_list_tuples(pack:dict)    -> list:
    
@@ -76,13 +90,12 @@ def stats_dict_2_sorted_list_tuples(pack:dict)    -> list:
     
     return unpack
 
-
 def extract_the_ith_arg(arr:list, i:int = 0) -> list:
     
     return [arg[i] for arg in arr]
 
 
-def how_many_stories_pulished_at_any_date()    ->  dict:
+def how_many_pulished_at_any_date(arr:list)    ->  dict:
     """
         name:  how_many_stories_pulished_at_any_date
         
@@ -90,7 +103,7 @@ def how_many_stories_pulished_at_any_date()    ->  dict:
         output: dict with num of publications for any day in the last 500 publications  
         """
     dates = {}      #   {date :     counter}
-    for story in top_stories:
+    for story in arr:
        
         date = datetime.datetime.fromtimestamp(story.time_of_creation)
         
@@ -102,7 +115,7 @@ def how_many_stories_pulished_at_any_date()    ->  dict:
 
     return dates
 
-def how_many_stories_pulished_at_any_weekDay()    ->  dict:
+def how_many_pulished_at_any_weekDay(arr:list)    ->  dict:
     """
         name:  how_many_stories_pulished_at_any_weekDay
         
@@ -110,7 +123,7 @@ def how_many_stories_pulished_at_any_weekDay()    ->  dict:
         output: dict with num of publications for any weekDay in the last 500 publications  
         """
     dates = {}      #   {date :     counter}
-    for story in top_stories:
+    for story in arr:
        
         date = datetime.datetime.fromtimestamp(story.time_of_creation)
 
@@ -118,7 +131,7 @@ def how_many_stories_pulished_at_any_weekDay()    ->  dict:
         
     return dates
     
-def how_many_comments_comapaird_to_the_weekDay()    ->  dict:
+def how_many_pulished_comapaird_to_the_weekDay(arr:list)    ->  dict:
     """
         name:  how_many_coments_comapaird_to_the_week_day
         
@@ -126,15 +139,29 @@ def how_many_comments_comapaird_to_the_weekDay()    ->  dict:
         output: dict with num of publications for any weekDay in the last 500 publications  
         """
     dates = {}      #   {date :     counter}
-    for story in top_stories:
+    for story in arr:
        
         date = datetime.datetime.fromtimestamp(story.time_of_creation)
 
         dates[date.weekday()] = dates.get(date.weekday(), 0) + len(story)
         
     return dates
+ 
+#TODO:  need to fix the zero day
+#TODO:  need to add title to the window
+    
+def statistics_table() -> list:
+    stats = []
+    
+    stats.append("num of pulished storirs: ", len(top_stories))
+    stats.append("num of pulished comments: ", len(comments))
+    stats.append("average number of stories a day: ",   
+                 len(top_stories)  /   len(how_many_pulished_at_any_date(top_stories)) )
+    stats.append("average number of comments a day: ",   
+                 len(top_stories)  /   len(how_many_pulished_at_any_date(comments)) )
     
 
+    
 #   TODO:   Auxiliary functions for statistics
 
 def save_as_CSV(array:list, headers_array:list, file_name:str)   ->  None:       
@@ -161,10 +188,8 @@ def save_as_CSV(array:list, headers_array:list, file_name:str)   ->  None:
  
         # writing data rows
         writer.writerows(array)
-        
-    pass    
 
-def show_statistics()   -> None:
+def show_statistics(stats:list)   -> None:
     #   TODO:    show_statistics documantation 
     """
         name:  show_statistics
@@ -178,7 +203,8 @@ def show_statistics()   -> None:
     
     for stat in stats:
     
-        plt.plot(extract_the_ith_arg(stat,0), extract_the_ith_arg(stat,1))
+      #  plt.plot(extract_the_ith_arg(stat,0), extract_the_ith_arg(stat,1))
+        plt.plot(extract_the_ith_arg(stat,1), extract_the_ith_arg(stat,0))
         plt.show()
 
     
@@ -200,8 +226,8 @@ repurpose_the_array(comments)
 
 
 #	statistics:
-#TODO: statistics
-stats = statistics()
+stats_graph    =   statistics()
+#stats_table    =   statistics_table()
 
 
 
@@ -235,7 +261,7 @@ save_as_CSV(    [item.get_as_dict() for item in comments],    items_headers, "co
  #   -----------         visualization         ----------
 
 #	show the statistics on the screen
-show_statistics()
+show_statistics(stats_graph)
 
 
 
