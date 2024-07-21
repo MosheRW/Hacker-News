@@ -43,7 +43,7 @@ This project involves scraping top stories and their top comments from a website
 - There is no external database, except for extensive use of a small `Record` object.
 
 ## Instructions for Running the Program:
-1. **Setup the environment:** Ensure you have Python installed along with necessary libraries like `requests`, `pandas`, and `matplotlib`.
+1. **Setup the environment:** Ensure you have Python installed along with necessary libraries like `requests`, `pandas`, `matplotlib`, 'os', 'datetime', 'csv' and tqdm
 2. **Run the main module:** This module will handle the entire workflow from scraping data to saving and visualizing the statistics.
 
 ## Files:
@@ -56,3 +56,6 @@ This project involves scraping top stories and their top comments from a website
 - The program will generate graphs and charts to visualize the statistics calculated from the data, providing an easy-to-understand representation of the information.
 
 By following the above structure, this project will efficiently scrape, store, analyze, and visualize data from the website's top stories and comments.
+
+## Threading:
+- the program will use threading to save time, when scriping
