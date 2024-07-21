@@ -50,7 +50,7 @@ This project involves scraping top stories and their top comments from a website
 - `top_stories.csv`: Contains information about the top stories.
 - `top_comments.csv`: Contains information about the top comments for each top story.
 - `statistics.csv`: Contains statistical information calculated from the top stories and comments data.
-the files will saved in a special folder in the files folder
+- the files will saved in a special folder in the files folder
 
 ## Visualization:
 - The program will generate graphs and charts to visualize the statistics calculated from the data, providing an easy-to-understand representation of the information.
