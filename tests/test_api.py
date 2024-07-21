@@ -71,3 +71,63 @@ print(unpack)
 unpack.sort()
 
 print(unpack)
+
+
+# importing the module
+import pandas as pd
+from IPython.display import display
+
+
+import pandas as pd
+import numpy as np
+import matplotlib as mpl
+import tkinter as tk
+
+stat = {
+    "strings": ["Adam", "Mike"],
+    "ints": [1, 3],
+    "floats": [1.123, 1000.23]
+}
+data = pd.DataFrame(stat)
+
+#df.style \
+  # .format(precision=3, thousands=".", decimal=",") \
+  # .format_index(str.upper, axis=1) \
+  # .relabel_index(["row 1", "row 2"], axis=0)
+
+# plt.table(cellText=stat.values(),
+#                       rowLabels=stat.values(),
+#                       rowColours=stat.keys(),
+#                       colLabels=None,
+#                       loc='bottom')
+
+root = tk.Tk()
+root.title("Data Display")
+
+# Assuming data is a pandas DataFrame
+for i, row in data.iterrows():
+    for j, value in enumerate(row):
+        label = tk.Label(root, text=str(value))
+        label.grid(row=i, column=j)
+
+root.mainloop()
+
+import pandas as pd
+
+
+# def display_data(data):
+#     root = tk.Tk()
+#     root.title("Data Display")
+
+#     # Assuming data is a pandas DataFrame
+#     for i, row in data.iterrows():
+#         for j, value in enumerate(row):
+#             label = tk.Label(root, text=str(value))
+#             label.grid(row=i, column=j)
+
+#     root.mainloop()
+
+# # Load your data (replace with your data source)
+# data = pd.read_csv("top_comments.csv")
+
+# display_data(data)

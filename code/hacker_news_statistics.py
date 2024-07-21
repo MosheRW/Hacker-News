@@ -1,6 +1,7 @@
 from matplotlib import pyplot as plt
 from item import Item
 import api, os, datetime, csv, tqdm
+import pandas as pd,  tkinter as tk
 
 
 def resize_for_Dbug(array:list, new_size:int = 10) -> list:
@@ -153,16 +154,25 @@ def how_many_pulished_comapaird_to_the_weekDay(arr:list)    ->  dict:
 def statistics_table() -> list:
     stats = []
     
-    stats.append("num of pulished storirs: ", len(top_stories))
-    stats.append("num of pulished comments: ", len(comments))
-    stats.append("average number of stories a day: ",   
-                 len(top_stories)  /   len(how_many_pulished_at_any_date(top_stories)) )
-    stats.append("average number of comments a day: ",   
-                 len(top_stories)  /   len(how_many_pulished_at_any_date(comments)) )
+    stats.append(("num of pulished storirs: ", len(top_stories)))
+    stats.append(("num of pulished comments: ", len(comments)))
+    stats.append(("average number of stories a day: ",   
+                 len(top_stories)  /   len(how_many_pulished_at_any_date(top_stories)) ))
+    stats.append(("average number of comments a day: ",   
+                 len(top_stories)  /   len(how_many_pulished_at_any_date(comments)) ))
     
+    stats.append(("how many comments per story: ",  len(comments) / len(top_stories)))
+     
 
+    headline =  ["fields", "stats"]
+    out = []
     
-#   TODO:   Auxiliary functions for statistics
+    for stat in stats:
+        out.append({    "fields" :   stat[0],
+                        "stats" :   stat[1]})
+        
+    return headline, out
+
 
 def save_as_CSV(array:list, headers_array:list, file_name:str)   ->  None:       
     """
@@ -178,7 +188,6 @@ def save_as_CSV(array:list, headers_array:list, file_name:str)   ->  None:
         part:   save the data as csv file
         """
 
-    print(os.getcwd())
     with open(file_name + ".csv", 'w',  encoding="utf-8") as csvfile:
         # creating a csv dict writer object
         writer = csv.DictWriter(csvfile, fieldnames=headers_array)
@@ -189,7 +198,24 @@ def save_as_CSV(array:list, headers_array:list, file_name:str)   ->  None:
         # writing data rows
         writer.writerows(array)
 
-def show_statistics(stats:list)   -> None:
+def change_folder() -> None:
+    #TODO: documantation
+    
+    #   the folder's name for the files we'll save that time
+    folder_name = datetime.datetime.now().strftime("%m_%d_%H_%M_%S")
+
+    #   changing the location for save the file in the right place
+    if not os.path.exists("files"):
+        os.mkdir("files")
+    
+    os.chdir("files") 
+    
+    os.mkdir(folder_name)
+    os.chdir(folder_name) 
+
+
+
+def show_graph_statistics(stats:list)   -> None:
     #   TODO:    show_statistics documantation 
     """
         name:  show_statistics
@@ -201,14 +227,43 @@ def show_statistics(stats:list)   -> None:
         """
     #   TODO:   show_statistics script
     
-    for stat in stats:
     
-      #  plt.plot(extract_the_ith_arg(stat,0), extract_the_ith_arg(stat,1))
+    #table = {stats_table[0][0]: [stat[0] for stat in stats_table[2]]}
+    #table = {stats_table[0][1]: [stat[1] for stat in stats_table[2]]}
+    
+    from IPython.display import display
+    
+    data = pd.read_csv("stats.csv")
+    data = pd.DataFrame(data)
+    
+    display(data)
+    
+    for stat in stats:          
         plt.plot(extract_the_ith_arg(stat,1), extract_the_ith_arg(stat,0))
         plt.show()
+        
+
+
+    # reading the database
+    #data = pd.read_csv("stats.csv")
+
+def show_table_statistics(data:pd.DataFrame) -> None:
+    root = tk.Tk()
+    root.title("statistics data")
+
+    for i, row in data.iterrows():
+        for j, value in enumerate(row):
+            label = tk.Label(root, text=str(value))
+            label.grid(row=i, column=j)
+
+    root.mainloop()
+
+
+
+
 
     
-
+#   -----------         main scipt         ----------
 
 
 #	Harvest the top stories uid's and place them in an array
@@ -227,23 +282,13 @@ repurpose_the_array(comments)
 
 #	statistics:
 stats_graph    =   statistics()
-#stats_table    =   statistics_table()
+stats_table    =   statistics_table()
 
 
 
 #   -----------         CSV's files         ----------
 
-#   the folder name for the files we'll save that time
-folder_name = datetime.datetime.now().strftime("%m_%d_%H_%M_%S")
-
-
-#   changing the location for save the file in the right place
-if not os.path.exists("files"):
-    os.mkdir("files")
-print(os.getcwd())
-os.chdir("files") 
-os.mkdir(folder_name)
-os.chdir(folder_name) 
+change_folder()
 
 #   the headers for the stories and comments csv tables 
 items_headers = ["uid", "title", "the content", "writer", "Published at", "score", "comments_quantity"]
@@ -255,13 +300,16 @@ save_as_CSV(    [item.get_as_dict() for item in top_stories],    items_headers, 
 save_as_CSV(    [item.get_as_dict() for item in comments],    items_headers, "comments")
 
 #	create and save the statistics CSV file
-#save_as_CSV(    stats,    items_headers,  "stats")     #	TODO:	the stories statistics file		<-
+save_as_CSV(    stats_table[1],    stats_table[0],  "stats") 
 
 
  #   -----------         visualization         ----------
 
-#	show the statistics on the screen
-show_statistics(stats_graph)
+#	show the graphes statistics on the screen
+show_graph_statistics(stats_graph)
+
+#	show the table statistics on the screen
+show_table_statistics( pd.read_csv("stats.csv"))
 
 
 
