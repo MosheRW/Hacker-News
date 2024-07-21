@@ -50,3 +50,24 @@ y = [2,15,6,8] # Y-axis points
 
 plt.plot(x, y) # Plot the chart
 plt.show() # display
+
+
+
+# daytes = [0,1,2,3,4,5,6]
+daytes = [6,1,4,3,2,5,0]
+grades = [53,48,95,43,82,1,0.2]
+
+pack = {}
+
+for i in range(7):
+    pack[daytes[i]] = grades[i]
+    
+print(pack)
+
+
+unpack = list(zip(pack.keys(), pack.values()))
+print(unpack)
+
+unpack.sort()
+
+print(unpack)

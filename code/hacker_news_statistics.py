@@ -26,6 +26,7 @@ def repurpose_the_array(uids_list:list) ->  None:
         
     for i, uid in tqdm.tqdm(enumerate(uids_list)):  
         uids_list[i] = Item(api.get_item(uid))
+        
 
 def constract_comments_array(stories_list:list)    ->  list:
     """
@@ -36,6 +37,7 @@ def constract_comments_array(stories_list:list)    ->  list:
         
         part:   travers on the previous array and haverst the the comments uid's and place them in an array
         """
+        
     comments_uids = []
     
     for story in tqdm.tqdm(stories_list):
@@ -59,13 +61,26 @@ def statistics()    -> list:
         part:   calculate the statistics, and return list of them (maybe as tupls)
         """
     #   TODO:   statistics script
-    stats = [how_many_stories_pulished_at_any_date()]
-    stats += [how_many_stories_pulished_at_any_weekDay()]
-    stats += [how_many_comments_comapaird_to_the_weekDay()]
+    stats = [stats_dict_2_sorted_list_tuples(how_many_stories_pulished_at_any_date())]
+    stats += [stats_dict_2_sorted_list_tuples(how_many_stories_pulished_at_any_weekDay())]
+    stats += [stats_dict_2_sorted_list_tuples(how_many_comments_comapaird_to_the_weekDay())]
     
 
     return stats
+
+def stats_dict_2_sorted_list_tuples(pack:dict)    -> list:
+   
+    unpack = list(zip(pack.keys(), pack.values()))
     
+    unpack.sort()
+    
+    return unpack
+
+
+def extract_the_ith_arg(arr:list, i:int = 0) -> list:
+    
+    return [arg[i] for arg in arr]
+
 
 def how_many_stories_pulished_at_any_date()    ->  dict:
     """
@@ -83,6 +98,8 @@ def how_many_stories_pulished_at_any_date()    ->  dict:
         
         dates[date] = dates.get(date, 0) + 1
         
+
+
     return dates
 
 def how_many_stories_pulished_at_any_weekDay()    ->  dict:
@@ -160,18 +177,17 @@ def show_statistics()   -> None:
     #   TODO:   show_statistics script
     
     for stat in stats:
-        print (stat.keys(), stat.values())
-        
-        plt.plot(stat.keys(), stat.values())
+    
+        plt.plot(extract_the_ith_arg(stat,0), extract_the_ith_arg(stat,1))
         plt.show()
 
-    pass
+    
 
 
 
 #	Harvest the top stories uid's and place them in an array
 top_stories = api.get_top_stories()
-top_stories = resize_for_Dbug(top_stories, 50)
+top_stories = resize_for_Dbug(top_stories, 10)
 
 #	creat objects to every uid story and place it in the OG array. function
 repurpose_the_array(top_stories)
