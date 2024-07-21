@@ -24,7 +24,7 @@ def repurpose_the_array(uids_list:list) ->  None:
         
         part:   convert the int types uids, to the item objects of the samr uids
         """
-        
+            
     for i, uid in tqdm.tqdm(enumerate(uids_list)):  
         uids_list[i] = Item(api.get_item(uid))       
 
@@ -63,23 +63,27 @@ def statistics()    -> list:
         
         part:   calculate the statistics, and return list of them (maybe as tupls)
         """
-    #   TODO:   statistics script
-    stats = [stats_dict_2_sorted_list_tuples(   
-                                how_many_pulished_at_any_date(top_stories))]
-    stats = [stats_dict_2_sorted_list_tuples(
-                                how_many_pulished_at_any_date(comments))]
+    stats = [[["how many stories pulished at any date", "Amount", "Dates"],
+              flip_the_tuples(stats_dict_2_sorted_list_tuples( how_many_pulished_at_any_date(top_stories)))]]
+    
+    stats += [[["how many comments pulished at any date","Amount", "Dates"]
+               ,flip_the_tuples(stats_dict_2_sorted_list_tuples( how_many_pulished_at_any_date(comments)))]]
     
 
-    stats += [stats_dict_2_sorted_list_tuples(
-                                how_many_pulished_at_any_weekDay(top_stories))]
-    stats += [stats_dict_2_sorted_list_tuples(
-                                how_many_pulished_at_any_weekDay(comments))]
+
+    stats += [[["how many stories pulished at any date of the week", "Amount", "Day of the week"],
+               flip_the_tuples(stats_dict_2_sorted_list_tuples( how_many_pulished_at_any_weekDay(top_stories)))]]
+    
+    stats += [[["how many comments pulished at any date of the week", "Amount", "Day of the week"],
+               flip_the_tuples(stats_dict_2_sorted_list_tuples( how_many_pulished_at_any_weekDay(comments)))]]
     
 
-    stats += [stats_dict_2_sorted_list_tuples(
-                                how_many_pulished_comapaird_to_the_weekDay(top_stories))]
-    stats += [stats_dict_2_sorted_list_tuples(
-                                how_many_pulished_comapaird_to_the_weekDay(comments))]
+
+    stats += [[["how many stories pulished at any date of the week", "Amount", "Day of the week"],
+               flip_the_tuples(stats_dict_2_sorted_list_tuples( how_many_pulished_comapaird_to_the_weekDay(top_stories)))]]
+    
+    stats += [[["how many comments pulished at any date of the week", "Amount", "Day of the week"],
+               flip_the_tuples(stats_dict_2_sorted_list_tuples( how_many_pulished_comapaird_to_the_weekDay(comments)))]]
     
 
     return stats
@@ -97,6 +101,13 @@ def extract_the_ith_arg(arr:list, i:int = 0) -> list:
     
     return [arg[i] for arg in arr]
 
+def flip_the_tuples(arr:list) -> list:
+    
+    for tup in arr:
+        new_tup =    tup[0], tup[1]
+        tup = new_tup
+        
+    return arr
 
 def how_many_pulished_at_any_date(arr:list)    ->  dict:
     """
@@ -112,9 +123,7 @@ def how_many_pulished_at_any_date(arr:list)    ->  dict:
         
         date = str(date.month)  +   str(date.day)
         
-        dates[date] = dates.get(date, 0) + 1
-        
-
+        dates[date] = dates.get(date, 0) + 1      
 
     return dates
 
@@ -130,6 +139,7 @@ def how_many_pulished_at_any_weekDay(arr:list)    ->  dict:
        
         date = datetime.datetime.fromtimestamp(story.time_of_creation)
 
+        #dates[date.weekday()] = dates.get(date.weekday(), 0) + 1
         dates[date.weekday()] = dates.get(date.weekday(), 0) + 1
         
     return dates
@@ -232,9 +242,13 @@ def show_graph_statistics(stats:list)   -> None:
         
         part:  
         """    
+    
     for stat in stats:          
-        plt.plot(extract_the_ith_arg(stat,1), extract_the_ith_arg(stat,0))
-        plt.show()
+            plt.title(stat[0][0])    
+            plt.ylabel(stat[0][1])
+            plt.xlabel(stat[0][2])
+            plt.bar(extract_the_ith_arg(stat[1],0), extract_the_ith_arg(stat[1],1))
+            plt.show()
 
 
 def show_table_statistics(data:pd.DataFrame) -> None:
