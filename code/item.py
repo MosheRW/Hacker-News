@@ -1,7 +1,6 @@
 
 
 class Item:
-    #   TODO:   documantation
     """
     name:   Item
     perpuse:    to store hackerNews stories and comments in an orgenized methode
