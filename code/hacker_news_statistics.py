@@ -20,10 +20,13 @@ def repurpose_the_array(uids_list:list, strt, end) ->  None:
     """
         name:  repurpose_the_array
         
-        input:  array contains items uids
+        input:  
+            -   array contains items uids,
+            -   strt index
+            -   end index
         output: None. but changes the inserted list
         
-        part:   convert the int types uids, to the item objects of the samr uids
+        part:   convert the int types uids, to the item objects of the same uids
         """
             
     for i in range(strt, min(len(uids_list), end)):  
@@ -33,9 +36,17 @@ def repurpose_the_array(uids_list:list, strt, end) ->  None:
     #     uids_list[i] = Item(api.get_item(uid))       
         
 def thred(uids_list:list) -> None:
-
-    downloadThreads = [] # a list of all the Thread objects
-    for i in range(0, len(uids_list), 10): # loops 14 times, creates 14 threads
+    """
+        name:  thred
+        
+        input:  array contains items uids
+        output: None. but changes the inserted list
+        
+        part:  using therading to convert the int types uids, to the item objects of the same uids
+        """
+            
+    downloadThreads = []
+    for i in range(0, len(uids_list), 10):
         start = i
         end = i + 10
         
@@ -179,8 +190,6 @@ def how_many_pulished_comapaird_to_the_weekDay(arr:list)    ->  dict:
         
     return dates
  
-#TODO:  need to fix the zero day
-#TODO:  need to add title to the window
 
 #   -----------         table statistics functions         ----------
     
