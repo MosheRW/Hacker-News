@@ -231,30 +231,22 @@ def show_graph_statistics(stats:list)   -> None:
         output: None.
         
         part:  
-        """
-    #   TODO:   show_statistics script
-    
-    
-    #table = {stats_table[0][0]: [stat[0] for stat in stats_table[2]]}
-    #table = {stats_table[0][1]: [stat[1] for stat in stats_table[2]]}
-    
-    from IPython.display import display
-    
-    data = pd.read_csv("stats.csv")
-    data = pd.DataFrame(data)
-    
-    display(data)
-    
+        """    
     for stat in stats:          
         plt.plot(extract_the_ith_arg(stat,1), extract_the_ith_arg(stat,0))
         plt.show()
-        
 
-
-    # reading the database
-    #data = pd.read_csv("stats.csv")
 
 def show_table_statistics(data:pd.DataFrame) -> None:
+      #   TODO:    show_statistics documantation 
+    """
+        name:  show_statistics
+        
+        input:  None.           
+        output: None.
+        
+        part:  
+        """    
     root = tk.Tk()
     root.title("statistics data")
 
@@ -301,10 +293,12 @@ change_folder()
 items_headers = ["uid", "title", "the content", "writer", "Published at", "score", "comments_quantity"]
 
 #	create and save the stories CSV file
-save_as_CSV(    [item.get_as_dict() for item in top_stories],    items_headers, "top_stories")
+save_as_CSV(    [item.get_as_dict() for item in top_stories],
+                                    items_headers, "top_stories")
 
 #	create and save the comments CSV file
-save_as_CSV(    [item.get_as_dict() for item in comments],    items_headers, "comments")
+save_as_CSV(    [item.get_as_dict() for item in comments],
+                                        items_headers, "comments")
 
 #	create and save the statistics CSV file
 save_as_CSV(    stats_table[1],    stats_table[0],  "stats") 
