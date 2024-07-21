@@ -13,7 +13,7 @@ def resize_for_Dbug(array:list, new_size:int = 10) -> list:
     return new_arr
 
 
-
+#   -----------         harvest functions         ----------
 
 def repurpose_the_array(uids_list:list) ->  None:
     """
@@ -26,8 +26,7 @@ def repurpose_the_array(uids_list:list) ->  None:
         """
         
     for i, uid in tqdm.tqdm(enumerate(uids_list)):  
-        uids_list[i] = Item(api.get_item(uid))
-        
+        uids_list[i] = Item(api.get_item(uid))       
 
 def constract_comments_array(stories_list:list)    ->  list:
     """
@@ -50,6 +49,9 @@ def constract_comments_array(stories_list:list)    ->  list:
 
     return  comments_uids
 
+
+
+#   -----------         graph statistics functions         ----------
 
 def statistics()    -> list:
     #   TODO:    needs to decide if the list wil be a tupls list 
@@ -150,6 +152,8 @@ def how_many_pulished_comapaird_to_the_weekDay(arr:list)    ->  dict:
  
 #TODO:  need to fix the zero day
 #TODO:  need to add title to the window
+
+#   -----------         table statistics functions         ----------
     
 def statistics_table() -> list:
     stats = []
@@ -173,6 +177,8 @@ def statistics_table() -> list:
         
     return headline, out
 
+
+#   -----------         csv files functions         ----------
 
 def save_as_CSV(array:list, headers_array:list, file_name:str)   ->  None:       
     """
@@ -214,7 +220,8 @@ def change_folder() -> None:
     os.chdir(folder_name) 
 
 
-
+#   -----------         display functions         ----------
+    
 def show_graph_statistics(stats:list)   -> None:
     #   TODO:    show_statistics documantation 
     """
