@@ -309,18 +309,15 @@ def show_table_statistics(data:pd.DataFrame) -> None:
 
 #	Harvest the top stories uid's and place them in an array
 top_stories = api.get_top_stories()
-top_stories = resize_for_Dbug(top_stories, 50)
+#top_stories = resize_for_Dbug(top_stories, 50)
 
 #	creat objects to every uid story and place it in the OG array. function
 thred(top_stories)
-#repurpose_the_array(top_stories)
 
-print(top_stories)
 #	travers on the previous array and haverst the the comments uid's and place them in an array
 comments = constract_comments_array(top_stories)
 
 #	creat objects to every uid story and place it in the OG array. function
-#repurpose_the_array(comments, 0, len(top_stories))
 thred(comments)
 
 
