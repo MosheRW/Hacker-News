@@ -21,7 +21,12 @@ def get(header:int | str, classify:str = "item") -> dict | list:
     else:
         address = address_prefix + second_prefix[classify] + header + address_suffix
     
-    return urllib3.request("GET",address).json()
+
+    try:
+         return urllib3.request("GET",address).json()
+    except:
+        print("ERROR") 
+         
       
 
 def get_item(id: int) -> dict:

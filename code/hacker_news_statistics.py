@@ -2,6 +2,7 @@ from matplotlib import pyplot as plt
 from item import Item
 import api, os, datetime, csv, tqdm
 import pandas as pd,  tkinter as tk
+import threading
 
 
 def resize_for_Dbug(array:list, new_size:int = 10) -> list:
@@ -15,7 +16,7 @@ def resize_for_Dbug(array:list, new_size:int = 10) -> list:
 
 #   -----------         harvest functions         ----------
 
-def repurpose_the_array(uids_list:list) ->  None:
+def repurpose_the_array(uids_list:list, strt, end) ->  None:
     """
         name:  repurpose_the_array
         
@@ -25,8 +26,26 @@ def repurpose_the_array(uids_list:list) ->  None:
         part:   convert the int types uids, to the item objects of the samr uids
         """
             
-    for i, uid in tqdm.tqdm(enumerate(uids_list)):  
-        uids_list[i] = Item(api.get_item(uid))       
+    for i in range(strt, min(len(uids_list), end)):  
+        uids_list[i] = Item(api.get_item(uids_list[i]))       
+        
+    # for i, uid in tqdm.tqdm(enumerate(uids_list)):  
+    #     uids_list[i] = Item(api.get_item(uid))       
+        
+def thred(uids_list:list) -> None:
+
+    downloadThreads = [] # a list of all the Thread objects
+    for i in range(0, len(uids_list), 10): # loops 14 times, creates 14 threads
+        start = i
+        end = i + 10
+        
+        downloadThread = threading.Thread(target=repurpose_the_array, args=(uids_list, start, end))
+        downloadThreads.append(downloadThread)
+        downloadThread.start()
+
+    for downloadThread in downloadThreads:
+        downloadThread.join()
+
 
 def constract_comments_array(stories_list:list)    ->  list:
     """
@@ -281,16 +300,19 @@ def show_table_statistics(data:pd.DataFrame) -> None:
 
 #	Harvest the top stories uid's and place them in an array
 top_stories = api.get_top_stories()
-top_stories = resize_for_Dbug(top_stories, 10)
+top_stories = resize_for_Dbug(top_stories, 50)
 
 #	creat objects to every uid story and place it in the OG array. function
-repurpose_the_array(top_stories)
+thred(top_stories)
+#repurpose_the_array(top_stories)
 
+print(top_stories)
 #	travers on the previous array and haverst the the comments uid's and place them in an array
 comments = constract_comments_array(top_stories)
 
 #	creat objects to every uid story and place it in the OG array. function
-repurpose_the_array(comments)
+#repurpose_the_array(comments, 0, len(top_stories))
+thred(comments)
 
 
 #	statistics:
